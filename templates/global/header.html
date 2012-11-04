@@ -1,6 +1,33 @@
 <!doctype html>
 <html>
 <head>
-	<title>Movie checklist</title>
+	<meta http-equiv="Content-type" content="text/html;charset=utf8" />
+	<title>{{ site_name }}</title>
+	<link href="{{ baseurl }}dev/assets/css/vendor/bootstrap.min.css" rel="stylesheet" />
+	<link href="{{ baseurl }}dev/assets/css/vendor/bootstrap-responsive.min.css" rel="stylesheet" />
+	<link href="{{ baseurl }}dev/assets/css/app.css" rel="stylesheet" />
+	
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<script src="{{ baseurl }}dev/assets/js/vendor/bootstrap.min.js"></script>
+	<script src="{{ baseurl }}dev/assets/js/app.js"></script>
 </head>
 <body>
+	<div class="navbar navbar-inverse navbar-fixed-top" style="display:none;">
+		<div class="navbar-inner">
+			<form class="navbar-form">
+				<input type="text" class="input-medium input-inverse" name="username" placeholder="Username" />
+				<input type="password" class="input-medium input-inverse" name="password" placeholder="Password">
+				<button type="submit" class="btn btn-inverse">Log in</button>
+				<button type="button" class="close pull-right">&times;</button>
+			</form>
+		</div>
+	</div>
+	
+	
+	<header>Movie checklist</header>
+	<form id="search-movie" class="search-form">
+		<input type="text" class="search-query" placeholder="Search" />
+	</form>
+	{% if isAdmin == true %}
+		Admin;
+	{% endif %}

@@ -33,6 +33,7 @@ class View
 	function render($template,$data=array(),$standalone=true)
 	{
 		if ( !is_array($data) ) { $data = array(); }
+		$data = $data + $this->baseconf();
 		$twig =& $this->twig;
 		$tpl = $twig->loadTemplate($template);
 		if ( !$standalone ) {
@@ -48,5 +49,14 @@ class View
 	function display($template,$data=array(),$standalone=true)
 	{
 		echo $this->render($template,$data,$standalone);
+	}
+
+	function baseconf()
+	{
+		return array(
+			'basedir' => BASEDIR,
+			'baseurl' => 'http://php.dev/movies/',
+			'site_name' => 'Movie checklist'
+		);
 	}
 }

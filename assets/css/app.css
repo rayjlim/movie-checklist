@@ -1,0 +1,38 @@
+body > .navbar .navbar-form {
+	margin:0 auto;
+	text-align:center;
+}
+body > .navbar .navbar-form .input-inverse {
+	background-color:#363636;
+	color:#FFFFFF;
+	border-color:rgba(255, 255, 255, 0.1) rgba(255, 255, 255, 0.1) rgba(255, 255, 255, 0.25);
+	text-align:left;
+}
+body > .navbar .navbar-form .close {
+	margin:7px 20px 0 -30px;
+	color:#FFFFFF;
+	text-shadow:none;
+}
+body > .navbar .navbar-form .close:hover {
+	color:#FFFFFF;
+	text-shadow:none;
+	opacity:0.7;
+}
+
+body > header {
+	width:100%;
+	text-align:center;
+	margin:1em 0;
+	font-family:Garamond, "Times New Roman", Times, serif;
+	font-variant:small-caps;
+	font-size:48px;
+}
+
+body > .search-form {
+	text-align:center;
+	margin:0 0 10px;
+}
+body > form .search-query {
+	width:350px;
+	text-align:left;
+}
