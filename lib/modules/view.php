@@ -33,7 +33,8 @@ class View
 	function render($template,$data=array(),$standalone=true)
 	{
 		if ( !is_array($data) ) { $data = array(); }
-		$data = $data + $this->baseconf();
+		$logindata['logged_in'] = isset($_SESSION['movieshash']) && strlen($_SESSION['movieshash']) == 40;
+		$data = $data + $this->baseconf() + $logindata;
 		$twig =& $this->twig;
 		$tpl = $twig->loadTemplate($template);
 		if ( !$standalone ) {

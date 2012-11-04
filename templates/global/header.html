@@ -25,9 +25,20 @@
 	
 	
 	<header>Movie checklist</header>
+
 	<form id="search-movie" class="search-form">
 		<input type="text" class="search-query" placeholder="Search" />
 	</form>
-	{% if isAdmin == true %}
-		Admin;
+	{% if logged_in == true %}
+	<form class="search-form add-movie">
+		<div class="input-prepend">
+			<span class="add-on"><i class="icon-film"></i></span>
+			<input type="text" class="rotten" placeholder="Search on Rottentomatoes.com" />
+		</div>
+		<div class="hover movie-list" style="display:none;">
+			<ul>
+			
+			</ul>
+		</div>
+	</form>
 	{% endif %}
