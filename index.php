@@ -7,6 +7,8 @@ require_once BASEDIR . '/lib/core/fundead.php';
 Fundead::init();
 Fundead::$module->load('View');
 
+if ( Fundead::$module->exists('Cache') ) Fundead::$module->load('Cache',true);
+
 Fundead::get('/teszt',function() {
 	Fundead::$module->load('Database');
 	Fundead::$module->Database->login('alfi','hackme!9925');

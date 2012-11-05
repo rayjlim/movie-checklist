@@ -9,16 +9,28 @@ class Module extends Fundead {
 	
     }
 
-    function load($name) {
+    function load($name,$singleton=false) {
 	$classname = ucwords(strtolower($name));
 	$filename = BASEDIR . '/lib/modules/' . strtolower($name) . '.php';
 	if (file_exists($filename) && is_readable($filename)) {
 	    require_once $filename;
-	    $this->$classname = new $classname();
+	    if ( !$singleton ) $this->$classname = new $classname();
+	    else $this->$classname =& $classname::getInstance();
 	    return true;
 	}
 	else
 	    return false;
+    }
+
+    function exists($name)
+    {
+		$filename = BASEDIR . '/lib/modules/' . strtolower($name) . '.php';
+		if (file_exists($filename) && is_readable($filename)) {
+			return true;
+		}
+		else {
+			return false;
+		}
     }
 
 }
