@@ -1,27 +1,25 @@
 <?php
 
-class Cache
+class Cache extends Memcache
 {
-	private static $instance;
-	public static $cache;
-
-	private function __construct()
+	function __construct()
 	{
-		if ( !isset($config['cache']) ) {
-			require_once BASEDIR.'/_config/cache.php';
-			foreach($config['cache'] as $key => $value) {
-				$this->$key = $value;
-			}
+		require_once BASEDIR.'/_config/cache.php';
+		foreach($config['cache'] as $key => $value) {
+			$this->$key = $value;
 		}
+
+		$this->connected = $this->connect($this->host,$this->port);
 	}
 
-	public function getInstance()
+	function store($key,$value)
 	{
-		if ( !isset(self::$instance) ) {
-			$c = __CLASS__;
-			self::$instance = new $c;
-		}
+		$data = array(
+			'timestamp' => time(),
+			'data' => $value
+		);
 
-		return self::$instance;
+		$this->set($key,$data);
+		return true;
 	}
 }

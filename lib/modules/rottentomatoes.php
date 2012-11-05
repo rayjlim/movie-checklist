@@ -15,26 +15,41 @@ class Rottentomatoes
 		if ( is_null($query) || strlen($query) <3 ) { return array(); }
 		if ( !is_int($page) || $page < 1 ) { $page = 1; }
 		
-		$url = "http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey={$this->apikey}&q={$query}&page_limit={$this->movies_per_page}&page={$page}";
-		$results = json_decode(file_get_contents($url),true);
-
-		if ( $results['total'] == 0 ) { return array(); }
-		
-		$sanitized = array();
-		$i = 0;
-		foreach($results['movies'] as $movie) {
-			$sanitized[$i]['id'] = $movie['id'];
-			$sanitized[$i]['title'] = $movie['title'];
-			$sanitized[$i]['year'] = $movie['year'];
-			$sanitized[$i]['poster'] = $movie['posters']['detailed'];
-			$castCount = count($movie['abridged_cast']);
-			$sanitized[$i]['cast'] = array();
-			if ($castCount > 3) { $castCount = 3; }
-			for($j=0;$j<$castCount;$j++) {
-				$sanitized[$i]['cast'][] = $movie['abridged_cast'][$j]['name'];
-			}
-			$i++;
+		$caching = false;
+		if ( Fundead::$module->exists('Cache') ) {
+			$caching = true;
+			$cache =& Fundead::$module->Cache;
+			$query_exists = $cache->get('query_'.$query.'_'.$page);
 		}
+
+		
+		if ( !$caching || ($caching && !$query_exists) ) {
+			$url = "http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey={$this->apikey}&q={$query}&page_limit={$this->movies_per_page}&page={$page}";
+			$results = json_decode(file_get_contents($url),true);
+
+			if ( $results['total'] == 0 ) { return array(); }
+			
+			$sanitized = array();
+			$i = 0;
+			foreach($results['movies'] as $movie) {
+				$sanitized[$i]['id'] = $movie['id'];
+				$sanitized[$i]['title'] = $movie['title'];
+				$sanitized[$i]['year'] = $movie['year'];
+				$sanitized[$i]['poster'] = $movie['posters']['detailed'];
+				$castCount = count($movie['abridged_cast']);
+				$sanitized[$i]['cast'] = array();
+				if ($castCount > 3) { $castCount = 3; }
+				for($j=0;$j<$castCount;$j++) {
+					$sanitized[$i]['cast'][] = $movie['abridged_cast'][$j]['name'];
+				}
+				$i++;
+			}
+
+			if ( $caching ) {
+				$cache->store('query_'.$query.'_'.$page,$sanitized);
+			}
+		}
+		else { $sanitized = $query_exists['data']; }
 
 		return json_encode($sanitized);
 	}

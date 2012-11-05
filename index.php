@@ -7,11 +7,12 @@ require_once BASEDIR . '/lib/core/fundead.php';
 Fundead::init();
 Fundead::$module->load('View');
 
-if ( Fundead::$module->exists('Cache') ) Fundead::$module->load('Cache',true);
+if ( Fundead::$module->exists('Cache') ) Fundead::$module->load('Cache');
 
 Fundead::get('/teszt',function() {
-	Fundead::$module->load('Database');
-	Fundead::$module->Database->login('alfi','hackme!9925');
+	Fundead::$module->load('Rottentomatoes');
+	$rt =& Fundead::$module->Rottentomatoes;
+	echo $rt->searchMovie('Dogs');
 });
 
 Fundead::get('/',function() {

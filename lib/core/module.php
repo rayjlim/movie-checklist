@@ -33,4 +33,15 @@ class Module extends Fundead {
 		}
     }
 
+    function loaded($name)
+    {
+    	$classname = ucwords(strtolower($name));
+    	if ( isset($this->$classname) && is_object($this->$classname) ) {
+    		return true;
+    	}
+    	else {
+    		return false;
+    	}
+    }
+
 }
