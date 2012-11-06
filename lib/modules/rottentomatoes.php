@@ -91,8 +91,6 @@ class Rottentomatoes
 		}
 		else { $sanitized = $movie_exists['data']; }
 
-
-		echo '<pre>';
-		var_dump($sanitized);
+		return $sanitized;
 	}
 }

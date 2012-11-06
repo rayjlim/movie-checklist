@@ -40,7 +40,9 @@ Fundead::post('/status',function() {
 });
 
 Fundead::post('/movieinfo',function($movie_id) {
-	echo 'fetching info for #'.$movie_id;
+	Fundead::$module->load('Rottentomatoes');
+	$result = Fundead::$module->Rottentomatoes->getMovieInfo($movie_id);
+	
 });
 
 Fundead::post('/searchmovie',function($search,$page=1) {

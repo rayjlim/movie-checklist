@@ -18,6 +18,9 @@
 			$('body > .navbar form button').attr('disabled','disabled');
 			$('body > .navbar form input[name="password"]').val('thisissilly');
 			logged_in = true;
+			if ( $('.search-form.add-movie').length === 0 ) {
+				d.location.reload();
+			}
 		}
 		else if ( s == '0' ) {
 			$('body > .navbar form input').addClass('error');
