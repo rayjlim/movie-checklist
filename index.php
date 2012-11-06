@@ -12,7 +12,8 @@ if ( Fundead::$module->exists('Cache') ) Fundead::$module->load('Cache');
 Fundead::get('/teszt',function() {
 	Fundead::$module->load('Rottentomatoes');
 	$rt =& Fundead::$module->Rottentomatoes;
-	echo $rt->searchMovie('Dogs');
+	echo $rt->getMovieInfo(14978);
+	// echo $rt->getMovieInfo(99999999999);
 });
 
 Fundead::get('/',function() {
