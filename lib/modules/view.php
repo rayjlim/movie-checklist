@@ -37,12 +37,14 @@ class View
 		$data = $data + $this->baseconf() + $logindata;
 		$twig =& $this->twig;
 		$tpl = $twig->loadTemplate($template);
+		$output = $tpl->render($data);
+
 		if ( !$standalone ) {
 			$header = $twig->loadTemplate('global/header.html');
 			$footer = $twig->loadTemplate('global/footer.html');
-		}
 
-		$output = $header->render($data) . $tpl->render($data) . $footer->render($data);
+			$output = $header->render($data) . $output . $footer->render($data);
+		}
 
 		return $output;
 	}

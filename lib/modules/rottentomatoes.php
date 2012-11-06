@@ -51,7 +51,7 @@ class Rottentomatoes
 		}
 		else { $sanitized = $query_exists['data']; }
 
-		return json_encode($sanitized);
+		return $sanitized;
 	}
 
 	function getMovieInfo($movieId=null)

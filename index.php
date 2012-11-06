@@ -11,9 +11,8 @@ if ( Fundead::$module->exists('Cache') ) Fundead::$module->load('Cache');
 
 Fundead::get('/teszt',function() {
 	Fundead::$module->load('Rottentomatoes');
-	$rt =& Fundead::$module->Rottentomatoes;
-	echo $rt->getMovieInfo(14978);
-	// echo $rt->getMovieInfo(99999999999);
+	$results = Fundead::$module->Rottentomatoes->searchMovie('scott');
+	echo Fundead::$module->View->render('rottentomatoes/movie_search.html',array('results' => $results));
 });
 
 Fundead::get('/',function() {
@@ -46,7 +45,8 @@ Fundead::post('/movieinfo',function($movie_id) {
 
 Fundead::post('/searchmovie',function($search,$page=1) {
 	Fundead::$module->load('Rottentomatoes');
-	echo Fundead::$module->Rottentomatoes->searchMovie($search,$page);
+	$results = Fundead::$module->Rottentomatoes->searchMovie($search,$page);
+	echo Fundead::$module->View->render('rottentomatoes/movie_search.html',array('results' => $results));
 });
 
 Fundead::post('/newmovie',function($moviedata) {
