@@ -80,12 +80,20 @@ class Rottentomatoes
 					'critics_score' => $result['ratings']['critics_score'],
 					'audience_score' => $result['ratings']['audience_score']
 				),
+				'cast' => array(),
+				'directors' => array(),
 				'poster' => $result['posters']['original'],
-				'cast' => $result['abridged_cast'],
-				'directors' => $result['abridged_directors'],
 				'studio' => $result['studio'],
-				'link' => $result['links']['alternate']
+				'link' => $result['links']['alternate'],
+				'synopsis' => $result['synopsis']
 			);
+
+			foreach($result['abridged_cast'] as $person) {
+				$sanitized['cast'][] = $person['name'];
+			}
+			foreach($result['abridged_directors'] as $person) {
+				$sanitized['directors'][] = $person['name'];
+			}
 
 			if ( $caching ) { $cache->store('movie_'.$movieId,$sanitized); }		
 		}

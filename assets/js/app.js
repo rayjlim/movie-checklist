@@ -60,7 +60,8 @@
 	});
 
 	$(d).on('click','.add-movie .movie-list ul li',function(e) {
-		console.log($(e.currentTarget).attr('data-movie-id'));
+		$('.add-movie .movie-list').css('display','none');
+		var movieid = $(e.currentTarget).attr('data-movie-id');
 	});
 
 	$(d).on('submit','body > .navbar form',function(e){
