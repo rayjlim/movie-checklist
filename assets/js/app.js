@@ -34,6 +34,7 @@
 		else {
 			if ( isNaN(parseInt(page,10)) || parseInt(page,10) < 1 ) { page = 1; }
 			$.post('index.php/searchmovie','search='+query+'&page='+page,function(data){
+					$('.add-movie .movie-list ul').html('');
 					$('.add-movie .movie-list ul').append(data);
 					$('.add-movie .movie-list').slideDown(500);
 			});
@@ -62,6 +63,9 @@
 	$(d).on('click','.add-movie .movie-list ul li',function(e) {
 		$('.add-movie .movie-list').css('display','none');
 		var movieid = $(e.currentTarget).attr('data-movie-id');
+		$.post('index.php/movieinfo','movie_id='+movieid,function(data){
+			console.log(data);
+		});
 	});
 
 	$(d).on('submit','body > .navbar form',function(e){

@@ -10,10 +10,6 @@ Fundead::$module->load('View');
 if ( Fundead::$module->exists('Cache') && defined('ENVIRONMENT') && ENVIRONMENT == 'production' ) Fundead::$module->load('Cache');
 
 Fundead::get('/teszt',function() {
-	//Fundead::$module->Cache->set()
-	Fundead::$module->load('Rottentomatoes');
-	$results = Fundead::$module->Rottentomatoes->getMovieInfo(770782775);
-	echo Fundead::$module->View->render('rottentomatoes/movie_details.html',array('movie' => $results));
 });
 
 Fundead::get('/',function() {
@@ -43,7 +39,7 @@ Fundead::post('/status',function() {
 Fundead::post('/movieinfo',function($movie_id) {
 	Fundead::$module->load('Rottentomatoes');
 	$result = Fundead::$module->Rottentomatoes->getMovieInfo($movie_id);
-
+	echo Fundead::$module->View->render('rottentomatoes/movie_details.html',array('movie'=>$result));
 });
 
 Fundead::post('/searchmovie',function($search,$page=1) {
