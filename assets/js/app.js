@@ -41,6 +41,10 @@
 		}
 	};
 
+	var addMovie = function(movieid) {
+		console.log(movieid);
+	};
+
 	$(d).on('status_change',function(e,new_status){
 		if ( new_status == '1' ) { loginStatus('1'); }
 	});
@@ -64,9 +68,18 @@
 		$('.add-movie .movie-list').css('display','none');
 		var movieid = $(e.currentTarget).attr('data-movie-id');
 		$.post('index.php/movieinfo','movie_id='+movieid,function(data){
-			console.log(data);
+			$('body .shadow').remove();
+			$('body').append(data);
 		});
 	});
+
+	$(d).on('click','.shadow .movieinfo .buttons [name="close"]',function(e) {
+		$(e.currentTarget).parents('.shadow').fadeOut(function() { $(this).remove(); });
+	});
+	$(d).on('click','.shadow .movieinfo .buttons [name="add"]',function(e) {
+		var movieid = $(e.currentTarget).parents('.movieinfo').attr('id');
+		addMovie(movieid);
+	});	
 
 	$(d).on('submit','body > .navbar form',function(e){
 		e.preventDefault();

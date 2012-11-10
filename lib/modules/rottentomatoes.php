@@ -77,8 +77,8 @@ class Rottentomatoes
 				'genres' => $result['genres'],
 				'runtime' => $result['runtime'],
 				'ratings' => array(
-					'critics_score' => $result['ratings']['critics_score'],
-					'audience_score' => $result['ratings']['audience_score']
+					'critics_score' => $result['ratings']['critics_score']."% ({$result['ratings']['critics_rating']})",
+					'audience_score' => $result['ratings']['audience_score']."% ({$result['ratings']['audience_rating']})"
 				),
 				'cast' => array(),
 				'directors' => array(),
