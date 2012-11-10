@@ -1,6 +1,7 @@
 TO DO:
   ✔ have movies displayed via Twig, not Javascript @done (12-11-06 18:00)
   ☐ adding movie to watchlist
-  ☐ movie info
+  ✔ movie info @done (12-11-10 08:03)
   ☐ ratings
-  ☐ refine searching
+  ☐ refine searching (concurrent ajax requests)
+  ☐ sample config
