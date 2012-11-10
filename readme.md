@@ -13,3 +13,8 @@ You'll need the following services to run the application:
 * MongoDB library for PHP
 * Memcache is optional, but it comes handy when you have to query RottenTomatoes
 * A RottenTomatoes API key
+
+Configuration
+==
+
+I'll make some sample config files, I swear.
